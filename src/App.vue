@@ -27,6 +27,4 @@ header {
   width: 100%;
 }
 
-
-
 </style>
