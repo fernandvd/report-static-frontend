@@ -4,12 +4,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import { onMounted, ref } from 'vue';
 import Navbar from './components/Navbar.vue';
 
-const showLoginBtn = ref(true);
 onMounted(() => {
-  const TOKEN = localStorage.getItem("token");
-    if (TOKEN) {
-      showLoginBtn.value = false;
-    }
 })
 </script>
 
@@ -17,13 +12,6 @@ onMounted(() => {
   <header>
     <div class="wrapper">
       <Navbar />
-    </div>
-    <div class="wrapper-login display-flex mt-10-px" >
-      <nav>
-        <RouterLink to="/login" class="link-login">
-          Iniciar Sesión 
-        </RouterLink>
-      </nav>
     </div>
   </header>
 
