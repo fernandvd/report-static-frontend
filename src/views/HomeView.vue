@@ -8,10 +8,7 @@ import { onMounted, ref } from 'vue';
 
 
 const showLoginBtn = ref(true);
-const user = ref({});
-const TOKEN = ref(null);
 const reports = ref([
-  /*
   {
     id: 1,
     title: "Reporte de usuario 1",
@@ -27,7 +24,6 @@ const reports = ref([
     title: "Reporte de usuario 3",
     created_at: "04/12/2020",
   },
-  */
 ]);
 const isLoading = ref(false);
 
@@ -49,14 +45,6 @@ onMounted(() => {
       modal.style.display = "none";
     }
   }
-
-  TOKEN.value = getToken();
-  if (TOKEN.value) {
-    showLoginBtn.value = false;
-    listReports();
-  }
-
-  user.value = getUser();
 
 })
 
@@ -83,6 +71,7 @@ function cleanStore() {
 }
 
 function generateReport(data) {
+  /*
   axios.post(`${URL_API}generate-report`, data,{
     headers: {
       'Authorization': `Bearer ${TOKEN.value}` 
@@ -96,7 +85,15 @@ function generateReport(data) {
     console.error(error.response);
   }).finally(() => {
     closeModal();
+  });*/
+  let today = new Date();
+  reports.value.push({
+    id: Math.random() * 10000,
+    title: data.title,
+    created_at: `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`,//"04/12/2020",
   });
+  closeModal();
+  
 }
 
 function openReport(item) {
@@ -107,33 +104,14 @@ function openReport(item) {
 
 <template>
   <main>
-    <div class="display-flex mt-10-px ms-10-px"  >
-      <nav>
-        <RouterLink to="/login" class="link-login" v-if="showLoginBtn">
-          Iniciar Sesión 
-        </RouterLink>
-        <div class="" v-else>
-          <span class="me-10-px">Hola {{user.name}}!</span>
-          <button type="button" class="btn-gris"  @click="cleanStore">
-            Cerrar Sessión
-          </button>
-        </div>
-      </nav>
-    </div>
-    <div v-if="!showLoginBtn">
+    
+    <div >
       <div class="display-flex container-title mb-10-px mt-10-px">
         <h3 class="text-center">Generador de reportes TK</h3>
       </div>
       <div class="mb-10-px mt-10-px"></div>
-      <div class="display-flex content-btn-reload" >
-        <button type="button" @click="listReports" class="btn-gris">
-          Recargar reportes
-        </button>
-      </div>
-      <div class="display-flex content-btn-reload" v-if="isLoading">
-        <p>Cargando ...</p>
-      </div>
-      <div class="container-table" v-else>
+
+      <div class="container-table">
         <table class="table ">
           <thead class="head-table">
             <tr>
@@ -156,8 +134,7 @@ function openReport(item) {
               </th>
               <th class="text-end">
                 <button type="button" class="btn-download" 
-                @click="openReport(item)"
-                v-if="item.report_link"
+                
                 >
                   Descargar
                   <img src="@/assets/icon_download.png" alt="icon download" />

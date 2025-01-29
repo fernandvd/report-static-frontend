@@ -68,11 +68,17 @@ defineEmits(['store'])
                         'btn-dorado': form.title && form.birth_date_end && form.birth_date_start,
                         'btn-gris': !(form.title && form.birth_date_end && form.birth_date_start),
                     }"
-                    @click="$emit('store', {
-                        'title': form.title,
-                        'birth_date_start': form.birth_date_start,
-                        'birth_date_end': form.birth_date_end
-                    })"
+                    @click="() => {
+                        $emit('store', {
+                            'title': form.title,
+                            'birth_date_start': form.birth_date_start,
+                            'birth_date_end': form.birth_date_end
+                        });
+                        form.title = '';
+                        form.birth_date_end = '';
+                        form.birth_date_start = '';
+                    }
+                    "
                     >
                         Generar reporte 
                     </button>

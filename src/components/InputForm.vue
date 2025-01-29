@@ -1,5 +1,5 @@
 <template>
-    <div class="el-form-item material-outline item-login email " :class="$attrs.class">
+    <div class="el-form-item material-outline " :class="$attrs.class">
         <label :for="props['id']"
         v-if="props['label']"
         class="el-form-item__label">
@@ -13,7 +13,7 @@
                 v-bind="{...$attrs, class: null}"
                 :type="props['type']" 
                 autocomplete="nope"
-                class="el-input__inner fbc-has-badge fbc-UID_1"
+                class="el-input__inner "
                 :value="modelValue"
                 @input="$emit('update:modelValue', $event.target.value)"
                 />
